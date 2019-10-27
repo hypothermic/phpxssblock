@@ -78,7 +78,7 @@ class XBlock {
      *
      * @return Database
      */
-    public static function getDatabase() {
+    private static function getDatabase() {
         // Instantiate the database connection if not available.
         if (self::$DATABASE_INST == null) {
             self::$DATABASE_INST = new self::$DATABASE_IMPL;
@@ -90,28 +90,43 @@ class XBlock {
     /**
      * Usage: `$name = XBlock::Sanitize($_GET["name"]);`
      *
-     * This method checks if the key is set and valid.
+     * This method checks if the value is set and valid.
      *
      * If the value contains critical HTML, like script tags, the user gets banned.
+     * (see <i>config.php</i> for the blocked patterns)
      *
      * @param $raw_value          string   the unsanitized value
      * @param $client_ip_address  string   the user's IP address
      * @return                    string   sanitized value, or an empty string if not successful.
      */
     public static function Sanitize($raw_value, $client_ip_address) {
+        // Verify that the input is a string
         if (!isset($raw_value)) {
             return "";
         }
         if (is_string($raw_value) && strlen($raw_value) > MAX_STR_LEN) {
             return "";
         }
+
+        // Check if the raw input string contains any blocked patterns
         $without_whitespace = preg_replace('/\s+/', '', $raw_value);
         foreach (BLOCKED_PATTERNS as $blocked_pattern) {
+            // If it contains a blocked pattern
             if (strpos($without_whitespace, $blocked_pattern) !== false) {
+
+                // Block the client.
                 self::addBlock($client_ip_address);
+
+                // Attempt to refresh the page so the red screen shows up.
+                // If this doesn't work it's not a huge problem, the client will still be blocked.
+                echo '<script type="text/javascript">location.reload(true);</script><meta http-equiv="refresh" content="0">';
+
+                // Exit the script to prevent any (additional) damage
                 exit();
             }
         }
+
+        // Return the sanitized string
         return htmlspecialchars(strip_tags($raw_value));
     }
 }
