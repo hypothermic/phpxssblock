@@ -105,8 +105,9 @@ class XBlock {
         if (is_string($raw_value) && strlen($raw_value) > MAX_STR_LEN) {
             return "";
         }
+        $without_whitespace = preg_replace('/\s+/', '', $raw_value);
         foreach (BLOCKED_PATTERNS as $blocked_pattern) {
-            if (strpos($raw_value, $blocked_pattern) !== false) {
+            if (strpos($without_whitespace, $blocked_pattern) !== false) {
                 self::addBlock($client_ip_address);
                 exit();
             }

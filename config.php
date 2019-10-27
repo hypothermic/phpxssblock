@@ -9,5 +9,5 @@ const DATABASE_HOST     = "localhost",
       DATABASE_NAME     = "XSSBlock",
       DATABASE_TABLE    = "Registry";
 
-const BLOCKED_PATTERNS  = ["<script>", "</script>", "<applet>", "</applet>", "<style>", "</style>", "<link>", "</link>", "<iframe>", "</iframe>", "<img>", "</img>", "<frame>", "</frame>", "<meta>", "<form>", "</form>"];
+const BLOCKED_PATTERNS  = ["<script>", "</script>", "<applet>", "</applet>", "<style>", "</style>", "<link>", "</link>", "<iframe>", "</iframe>", "<img>", "</img>", "<frame>", "</frame>", "<meta>", "<form>", "</form>", "<svg/onload"];
 const MAX_STR_LEN       = 8192;
