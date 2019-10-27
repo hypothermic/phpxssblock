@@ -6,13 +6,7 @@ Block the IP Addresses of clients who are trying to exploit your website by usin
 
 ## Usage
 
-### Automatic usage
-
-```php
-TODO create an automatic method in XBlock
-```
-
-### Manual usage
+See the [form.php example](example/form.php) to get a better view of how to implement this library.
 
 At the top of each page, put:
 
@@ -27,10 +21,13 @@ if (XBlock::isBlocked($_SERVER['REMOTE_ADDR'])) {
 ?>
 ```
 
-And, when handling user input, validate each `$_GET` and `$_POST` through the XBlock Wrapper Methods:
+And, when handling user input, validate each `$_GET` and `$_POST` through the XBlock Sanitize Method:
 
 ```php
-TODO
+$username = XBlock::Sanitize($_GET["username"], $_SERVER['REMOTE_ADDR']);
+
+// For example, show it as a HTML paragraph.
+echo("<p>Hello " . $username . "</p>");
 ```
 
 ## Database
