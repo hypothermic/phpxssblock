@@ -2,6 +2,8 @@
 
 Block the IP Addresses of clients who are trying to exploit your website by using XSS.
 
+![Screenshot Example](screenshot.png)
+
 ## Usage
 
 ### Automatic usage
