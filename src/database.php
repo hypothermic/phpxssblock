@@ -5,6 +5,8 @@ interface Database {
 
     /**
      * Initializes the database and creates the table (if needed)
+     *
+     * @return void
      */
     public function initialize();
 
@@ -12,6 +14,7 @@ interface Database {
      * Add a client block listing to the database.
      *
      * @param $ip_address string Client IP-Address String
+     * @return void
      */
     public function addBlock($ip_address);
 

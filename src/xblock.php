@@ -1,7 +1,7 @@
 <?php
 namespace HypothermicIT\XSSBlock;
 
-use DB_Impl_MySQL;
+use HypothermicIT\XSSBlock\DB_Impl_MySQL;
 
 class XBlock {
 
@@ -13,6 +13,8 @@ class XBlock {
     private static $DATABASE_IMPL = DB_Impl_MySQL::class;
 
     /**
+     * The global database instance.
+     *
      * @var Database
      */
     private static $DATABASE_INST = null;
@@ -104,13 +106,13 @@ class XBlock {
         if (!isset($raw_value)) {
             return "";
         }
-        if (is_string($raw_value) && strlen($raw_value) > MAX_STR_LEN) {
+        if (is_string($raw_value) && strlen($raw_value) > Config::$MAX_STR_LEN) {
             return "";
         }
 
         // Check if the raw input string contains any blocked patterns
         $without_whitespace = preg_replace('/\s+/', '', $raw_value);
-        foreach (BLOCKED_PATTERNS as $blocked_pattern) {
+        foreach (Config::$BLOCKED_PATTERNS as $blocked_pattern) {
             // If it contains a blocked pattern
             if (strpos($without_whitespace, $blocked_pattern) !== false) {
 

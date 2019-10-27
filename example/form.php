@@ -1,11 +1,8 @@
 <?php
+// Include the Composer autoloader
+require_once __DIR__.'/../vendor/autoload.php';
 
-// Include all the dependencies:
 use HypothermicIT\XSSBlock\XBlock;
-include_once("../src/xblock.php");
-include_once("../src/database.php");
-include_once("../src/db_impl_mysql.php");
-include_once("../config.php");
 
 if (XBlock::isBlocked($_SERVER['REMOTE_ADDR'])) {
     include 'error-page.html';
@@ -13,8 +10,6 @@ if (XBlock::isBlocked($_SERVER['REMOTE_ADDR'])) {
 }
 
 ?>
-
-<!-- TODO in this example: get all $_GET and $_POST through the XBlock::GET and XBlock::POST wrapper methods !!!-->
 
 <!DOCTYPE html>
 <html lang="en">

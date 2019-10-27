@@ -1,0 +1,40 @@
+{
+    "name": "hypothermic/phpxssblock",
+    "description": "Block the dirty script kiddies who are trying to use XSS on your web forms!",
+    "keywords": ["xss", "block"],
+    "license": "MIT",
+    "homepage": "https://github.com/hypothermic/phpxssblock",
+    "authors": [
+        {
+            "name": "hypothermic",
+            "email": "admin@hypothermic.nl"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/hypothermic/phpxssblock/issues"
+    },
+    "type": "library",
+    "time": "2019-10-27",
+    "require": {
+		"php": ">=7.1",
+        "ext-pdo": "*"
+    },
+    "require-dev": {
+		"phpunit/phpunit": "6.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "HypothermicIT\\XSSBlock\\": "src/",
+            "HypothermicIT\\XSSBlock\\XBlock": "src/xblock.php",
+            "HypothermicIT\\XSSBlock\\DB_Impl_MySQL": "src/db_impl_mysql.php",
+            "HypothermicIT\\XSSBlock\\Database": "src/database.php",
+            "HypothermicIT\\XSSBlock\\Config": "src/config.php"
+        },
+        "files": [
+            "src/config.php",
+            "src/database.php",
+            "src/db_impl_mysql.php",
+            "src/xblock.php"
+        ]
+    }
+}
