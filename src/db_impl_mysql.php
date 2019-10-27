@@ -14,7 +14,7 @@ class DB_Impl_MySQL implements Database {
      * @return void
      */
     public function addBlock($ip_address) {
-        $sql = 'INSERT INTO ' . DATABASE_NAME . "." . DATABASE_TABLE . ' (`ip_addr`) VALUES (?)';
+        $sql = 'INSERT INTO `' . DATABASE_NAME . "`.`" . DATABASE_TABLE . '` (`ip_addr`) VALUES (?)';
         $stmt = $this->getConnection()->prepare($sql);
         $stmt->bindParam(1, $ip_address, PDO::PARAM_STR);
         $stmt->execute();
